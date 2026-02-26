@@ -1,0 +1,54 @@
+---
+tags:
+    - tlo
+---
+# `SelectedItem`
+
+<!--tlo-desc-start-->
+Used to return information on the object that is selected in your own inventory while using a merchant.
+<!--tlo-desc-end-->
+## Forms
+<!--tlo-forms-start-->
+### {{ renderMember(type='item', name='SelectedItem') }}
+
+:   !!! example
+
+        === "MQScript"
+
+            ```
+            /if (!${SelectedItem.ID}) {
+                /echo Nothing in your inventory is selected
+            } else {
+                /echo Size of the item: ${SelectedItem.Size}
+
+                /if (${SelectedItem.Charges} < 1) {
+                    /echo the selected item is out of charges
+                }
+
+                /if (${SelectedItem.Name.Equal[rusty dagger]}) {
+                    /echo the selected item is a rusty dagger
+                }
+            }
+            ```
+        
+        === "Lua"
+
+            ```lua
+            if mq.TLO.SelectedItem() == nil then
+                print('Nothing in your inventory is selected')
+            else
+                print('Size of the item: ', mq.TLO.SelectedItem.Size())
+
+                if mq.TLO.SelectedItem.Charges() < 1 then
+                    print('The selected item is out of charges')
+                end
+
+                if mq.TLO.SelectedItem.Name.Equal('rusty dagger')() then
+                    print('The selected item is a rusty dagger')
+                end
+            end
+            ```
+<!--tlo-forms-end-->
+<!--tlo-linkrefs-start-->
+[item]: ../data-types/datatype-item.md
+<!--tlo-linkrefs-end-->
